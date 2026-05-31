@@ -1,0 +1,75 @@
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+.eggs/
+dist/
+build/
+pip-wheel-metadata/
+*.manifest
+*.spec
+
+# Secrets and local config
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Local databases and runtime data
+*.db
+*.sqlite3
+data/
+*.json.bak
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+
+# Type checkers and linters
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+dmypy.json
+
+# IDE and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and temp files
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+
+# Jupyter (if used while learning)
+.ipynb_checkpoints/
+
+# Cursor local state
+.cursor/
