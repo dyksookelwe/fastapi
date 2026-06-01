@@ -1,4 +1,6 @@
 from fastapi import APIRouter, HTTPException
+from app.database import SessionLocal
+from app.models import Book
 from app.fake_db import books_db
 from app.schemas import BookCreate, BookUpdate, BookResponse
 from datetime import datetime
@@ -7,6 +9,16 @@ router = APIRouter(
     prefix="/books",
     tags=["books"]
 )
+
+@router.get("/db-test")
+def db_test():
+    db = SessionLocal()
+
+    try:
+        books = db.query(Book).all()
+        return books
+    finally:
+        db.close()
 
 @router.get("/", response_model=list[BookResponse], status_code=200)
 def get_books(author: str | None = None, year: int | None = None, search: str | None = None, sort: str | None = None, skip: int = 0, limit: int = 10):
