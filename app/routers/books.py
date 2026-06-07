@@ -1,24 +1,13 @@
 from fastapi import APIRouter, HTTPException, Depends
 from app.database import SessionLocal, get_db
-from app.models import Book
+from app.models import Book, Author
 from app.schemas import BookCreate, BookUpdate, BookResponse
-from datetime import datetime
 from sqlalchemy.orm import Session
 
 router = APIRouter(
     prefix="/books",
     tags=["books"]
 )
-
-@router.get("/db-test")
-def db_test():
-    db = SessionLocal()
-
-    try:
-        books = db.query(Book).all()
-        return books
-    finally:
-        db.close()
 
 @router.get("/", response_model=list[BookResponse], status_code=200)
 def get_books(db: Session = Depends(get_db)):
@@ -38,17 +27,23 @@ def get_book(book_id: int, db: Session = Depends(get_db)):
 @router.post("/", response_model=BookResponse, status_code=201)
 def post_book(book_info: BookCreate, db: Session = Depends(get_db)):
         existing_book = (
-            db.query(Book).where(Book.title == book_info.title, Book.author == book_info.author).first()
+            db.query(Book).where(Book.title == book_info.title, Book.author_id == book_info.author_id).first()
         )
         if existing_book is not None:
             raise HTTPException(
                 status_code = 409,
                 detail = "Book already exists"
             )
+        author = db.query(Author).where(Author.id == book_info.author_id).first()
+        if author is None:
+            raise HTTPException(
+                status_code = 404,
+                detail = "Author is not found"
+            )
 
         new_book = Book(
             title = book_info.title,
-            author = book_info.author,
+            author_id = book_info.author_id,
             year = book_info.year
         )
         db.add(new_book)
