@@ -1,5 +1,5 @@
 from sqlalchemy import ForeignKey, Integer, String
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship, relationships
 from app.database import Base
 
 class Book(Base):
@@ -15,11 +15,19 @@ class Book(Base):
         Integer,
         ForeignKey("authors.id")
     )
+    category_id: Mapped[int] = mapped_column(
+        Integer,
+        ForeignKey("category.id")
+    )
     year: Mapped[int] = mapped_column(
         Integer
     )
     author = relationship(
         "Author",
+        back_populates="books"
+    )
+    category = relationship(
+        "Category",
         back_populates="books"
     )
 
@@ -35,4 +43,18 @@ class Author(Base):
     books = relationship(
         "Book",
         back_populates = "author"
+    )
+
+class Category(Base):
+    __tablename__ = "category"
+    id: Mapped[int] = mapped_column(
+        Integer,
+        primary_key=True
+    )
+    name: Mapped[str] = mapped_column(
+        String(200)
+    )
+    books = relationship(
+        "Book",
+        back_populates="category"
     )

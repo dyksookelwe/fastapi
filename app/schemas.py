@@ -27,3 +27,28 @@ class BookResponse(BaseModel):
     created_at: datetime | None = None
     author: AuthorResponse
     model_config = {"from_attributes": True}
+
+class BookShortResponse(BaseModel):
+    id: int
+    title: str = Field(..., min_length=1 , max_length=200)
+
+class AuthorWithBooksResponse(BaseModel):
+    id: int
+    name: str = Field(..., min_length=1, max_length=200)
+    books: list[BookShortResponse]
+
+class CategoryCreate(BaseModel):
+    name: str = Field(..., min_length=1, max_length=200)
+
+class CategoryResponse(BaseModel):
+    id:int
+    name: str
+
+class CategoryWithBooks(CategoryResponse):
+    books = list[BookShortResponse]
+
+class CategoryUpdate(BaseModel):
+    name: str | None = None
+
+
+

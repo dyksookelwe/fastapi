@@ -59,6 +59,11 @@ def update_book(book_id: int,book_data: BookUpdate,db: Session = Depends(get_db)
             status_code=404,
             detail="Book is not found"
         )
+    if (book_data.author_id):
+        raise HTTPException(
+            status_code=404,
+            detail="Author is not found"
+        )
     update_data = book_data.model_dump(exclude_unset=True)
     for key,value in update_data.items():
         setattr(temp_book,key,value)
