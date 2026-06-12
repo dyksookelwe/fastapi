@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from app.database import init_db
-from app.routers import books as books_router, authors as authors_router, category as category_router
+from app.routers.books import router as books_router
+from app.routers.authors import router as authors_router
+from app.routers.category import router as category_router
 
 app = FastAPI()
 

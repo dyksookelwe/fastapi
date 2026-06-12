@@ -1,6 +1,7 @@
 from sqlalchemy import ForeignKey, Integer, String
-from sqlalchemy.orm import Mapped, mapped_column, relationship, relationships
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.database import Base
+
 
 class Book(Base):
     __tablename__ = "books"
@@ -31,6 +32,7 @@ class Book(Base):
         back_populates="books"
     )
 
+
 class Author(Base):
     __tablename__ = "authors"
     id: Mapped[int] = mapped_column(
@@ -42,8 +44,9 @@ class Author(Base):
     )
     books = relationship(
         "Book",
-        back_populates = "author"
+        back_populates="author"
     )
+
 
 class Category(Base):
     __tablename__ = "category"
