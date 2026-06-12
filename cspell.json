@@ -1,0 +1,37 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "useGitignore": true,
+  "ignorePaths": [
+    ".venv",
+    "__pycache__"
+  ],
+  "words": [
+    "alembic",
+    "FastAPI",
+    "Pydantic",
+    "psycopg",
+    "uvicorn",
+    "httpx",
+    "dotenv",
+    "SQLAlchemy",
+    "DeclarativeBase",
+    "autocommit",
+    "autoflush",
+    "back_populates",
+    "from_attributes",
+    "mapped_column",
+    "tablename",
+    "schemas",
+    "routers",
+    "authors",
+    "author_id",
+    "books",
+    "book_id",
+    "categories",
+    "category_id",
+    "init_db",
+    "get_db",
+    "ShortResponse"
+  ]
+}
