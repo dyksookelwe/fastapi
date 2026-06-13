@@ -67,9 +67,13 @@ logs/
 tmp/
 temp/
 *.tmp
+*.bak
 
 # Jupyter (if used while learning)
 .ipynb_checkpoints/
 
 # Cursor local state
 .cursor/
+
+# Alembic local cache
+alembic/versions/__pycache__/
